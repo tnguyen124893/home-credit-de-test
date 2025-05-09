@@ -1,0 +1,11 @@
+client_id,client_name,region_id,join_date,credit_score
+CL001,John Smith,1,2023-01-15,720
+CL002,Mary Johnson,2,2023-02-20,680
+CL003,Robert Davis,1,2023-01-30,750
+CL004,Patricia Brown,3,2023-03-05,630
+CL005,James Wilson,4,2023-02-10,700
+CL006,Linda Taylor,5,2023-04-12,670
+CL007,Michael Moore,2,2023-03-18,620
+CL008,Elizabeth Lee,3,2023-01-25,760
+CL009,William Martin,4,2023-02-28,690
+CL010,Barbara Thompson,5,2023-03-22,710

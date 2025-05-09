@@ -1,0 +1,4 @@
+contract_number,client_id,product_code,principal_amount,interest_amount,fee_amount,tenor,start_date,status,last_status_change_date
+LC001001,CL001,P001,5000.00,600.00,100.00,12,2023-02-01,Active,2023-02-01
+LC001002,CL002,P003,15000.00,1200.00,150.00,24,2023-03-01,Active,2023-03-01
+LC001003,CL003,P005,80000.00,8800.00,1200.00,6,2023-03-10,Paid-off,2023-09-10

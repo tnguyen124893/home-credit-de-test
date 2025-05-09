@@ -1,0 +1,11 @@
+product_code,product_name,product_type_id,base_interest_rate,processing_fee_percent,min_tenor,max_tenor,active_flag
+P001,Quick Cash,1,0.12,0.02,6,24,1
+P002,Personal Loan Plus,1,0.10,0.015,12,48,1
+P003,Home Appliance Loan,2,0.08,0.01,6,36,1
+P004,Electronics Financing,2,0.09,0.0125,3,24,1
+P005,Standard Bike Loan,3,0.11,0.015,12,36,1
+P006,Premium Motorbike Financing,3,0.095,0.0175,12,60,1
+P007,Emergency Cash,1,0.15,0.025,3,12,1
+P008,Furniture Financing,2,0.085,0.0125,6,24,1
+P009,Scooter Loan,3,0.105,0.015,6,24,1
+P010,Salary Advance,1,0.14,0.02,1,6,0
