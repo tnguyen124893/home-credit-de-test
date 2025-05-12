@@ -8,7 +8,7 @@ with import_raw as (
         inst_amt_interest,
         inst_amt_fee,
         status
-    from {{ ref('raw_installments') }}
+    from {{ source('raw', 'raw_installments') }}
 ),
 
 add_surrogate_key as (

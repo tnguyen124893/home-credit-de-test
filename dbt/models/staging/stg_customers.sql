@@ -5,7 +5,7 @@ with import_raw as (
         region_id,
         join_date,
         credit_score
-    from {{ ref('raw_customers') }}
+    from {{ source('raw', 'raw_customers') }}
 ),
 
 add_surrogate_key as (

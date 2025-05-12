@@ -2,7 +2,7 @@ with import_raw as (
     select
         region_id,
         region_name
-    from {{ ref('raw_regions') }}
+    from {{ source('raw', 'raw_regions') }}
 ),
 
 add_surrogate_key as (

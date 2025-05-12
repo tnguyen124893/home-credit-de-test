@@ -8,7 +8,7 @@ with import_raw as (
         min_tenor,
         max_tenor,
         active_flag
-    from {{ ref('raw_products') }}
+    from {{ source('raw', 'raw_products') }}
 ),
 
 add_surrogate_key as (

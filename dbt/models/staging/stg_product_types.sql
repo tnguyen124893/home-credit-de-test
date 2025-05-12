@@ -2,7 +2,7 @@ with import_raw as (
     select
         product_type_id,
         product_type_name
-    from {{ ref('raw_product_types') }}
+    from {{ source('raw', 'raw_product_types') }}
 ),
 
 add_surrogate_key as (

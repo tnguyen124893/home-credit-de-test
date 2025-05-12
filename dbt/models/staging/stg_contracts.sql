@@ -10,7 +10,7 @@ with import_raw as (
         start_date,
         status,
         last_status_change_date
-    from {{ ref('raw_contracts') }}
+    from {{ source('raw', 'raw_contracts') }}
 ),
 
 add_surrogate_key as (

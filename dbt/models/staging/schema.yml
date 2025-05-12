@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: stg_contracts
+    description: "Staging model for contracts. Applies light transformation and deduplication to raw_contracts."
+    columns:
+      - name: contract_number
+        description: "Unique contract identifier."
+        tests: [not_null, unique]
+      - name: client_id
+        description: "Foreign key to customer."
+        tests: [not_null]
+      - name: product_code
+        description: "Foreign key to product."
+        tests: [not_null]
+      - name: principal_amount
+        description: "Principal amount of the contract."
+      - name: interest_amount
+        description: "Interest amount of the contract."
+      - name: fee_amount
+        description: "Fee amount of the contract."
+      - name: tenor
+        description: "Tenor (duration) of the contract."
+      - name: start_date
+        description: "Contract start date."
+      - name: status
+        description: "Current status of the contract."
+      - name: last_status_change_date
+        description: "Date of last status change."
+      - name: stg_contracts_sk
+        description: "Surrogate key for deduplication."
+        tests: [unique, not_null]
+
+  - name: stg_installments
+    description: "Staging model for installments. Applies light transformation and deduplication to raw_installments."
+    columns:
+      - name: installment_id
+        description: "Unique installment identifier."
+        tests: [not_null, unique]
+      - name: contract_number
+        description: "Foreign key to contract."
+        tests: [not_null]
+      - name: installment_number
+        description: "Installment sequence number."
+      - name: due_date
+        description: "Due date for the installment."
+      - name: inst_amt_principal
+        description: "Principal amount for the installment."
+      - name: inst_amt_interest
+        description: "Interest amount for the installment."
+      - name: inst_amt_fee
+        description: "Fee amount for the installment."
+      - name: status
+        description: "Status of the installment."
+      - name: stg_installments_sk
+        description: "Surrogate key for deduplication."
+        tests: [unique, not_null]
+
+  - name: stg_product_types
+    description: "Staging model for product types. Applies light transformation and deduplication to raw_product_types."
+    columns:
+      - name: product_type_id
+        description: "Unique product type identifier."
+        tests: [not_null, unique]
+      - name: product_type_name
+        description: "Name of the product type."
+      - name: stg_product_types_sk
+        description: "Surrogate key for deduplication."
+        tests: [unique, not_null]
+
+  - name: stg_products
+    description: "Staging model for products. Applies light transformation and deduplication to raw_products."
+    columns:
+      - name: product_code
+        description: "Unique product code."
+        tests: [not_null, unique]
+      - name: product_name
+        description: "Name of the product."
+      - name: product_type_id
+        description: "Foreign key to product type."
+        tests: [not_null]
+      - name: base_interest_rate
+        description: "Base interest rate for the product."
+      - name: processing_fee_percent
+        description: "Processing fee percent for the product."
+      - name: min_tenor
+        description: "Minimum tenor for the product."
+      - name: max_tenor
+        description: "Maximum tenor for the product."
+      - name: active_flag
+        description: "Flag indicating if the product is active."
+      - name: stg_products_sk
+        description: "Surrogate key for deduplication."
+        tests: [unique, not_null]
+
+  - name: stg_regions
+    description: "Staging model for regions. Applies light transformation and deduplication to raw_regions."
+    columns:
+      - name: region_id
+        description: "Unique region identifier."
+        tests: [not_null, unique]
+      - name: region_name
+        description: "Name of the region."
+      - name: stg_regions_sk
+        description: "Surrogate key for deduplication."
+        tests: [unique, not_null]
+
+  - name: stg_repayments
+    description: "Staging model for repayments. Applies light transformation and deduplication to raw_repayments."
+    columns:
+      - name: repayment_id
+        description: "Unique repayment identifier."
+        tests: [not_null, unique]
+      - name: installment_id
+        description: "Foreign key to installment."
+        tests: [not_null]
+      - name: repayment_date
+        description: "Date of repayment."
+      - name: repayment_amount
+        description: "Amount repaid."
+      - name: stg_repayments_sk
+        description: "Surrogate key for deduplication."
+        tests: [unique, not_null] 

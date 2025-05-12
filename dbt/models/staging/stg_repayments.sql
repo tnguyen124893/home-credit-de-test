@@ -4,7 +4,7 @@ with import_raw as (
         installment_id,
         repayment_date,
         repayment_amount
-    from {{ ref('raw_repayments') }}
+    from {{ source('raw', 'raw_repayments') }}
 ),
 
 add_surrogate_key as (
