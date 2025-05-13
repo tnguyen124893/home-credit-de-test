@@ -1,8 +1,7 @@
 with import_raw as (
     select
-        region_id,
-        region_name
-    from {{ source('raw', 'raw_regions') }}
+        *
+    from {{ ref('snapshot_raw_regions') }}
 ),
 
 add_surrogate_key as (
@@ -11,7 +10,8 @@ add_surrogate_key as (
         region_name,
         {{ dbt_utils.generate_surrogate_key([
             "region_id",
-            "region_name"
+            "region_name",
+            "dbt_valid_from"
         ])}} as stg_regions_sk
     from import_raw
 ),

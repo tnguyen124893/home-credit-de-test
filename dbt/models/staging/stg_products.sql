@@ -1,14 +1,7 @@
 with import_raw as (
     select
-        product_code,
-        product_name,
-        product_type_id,
-        base_interest_rate,
-        processing_fee_percent,
-        min_tenor,
-        max_tenor,
-        active_flag
-    from {{ source('raw', 'raw_products') }}
+        *
+    from {{ ref('snapshot_raw_products') }}
 ),
 
 add_surrogate_key as (
@@ -29,7 +22,8 @@ add_surrogate_key as (
             "processing_fee_percent",
             "min_tenor",
             "max_tenor",
-            "active_flag"
+            "active_flag",
+            "dbt_valid_from"
         ])}} as stg_products_sk
     from import_raw
 ),

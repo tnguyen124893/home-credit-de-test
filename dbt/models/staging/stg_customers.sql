@@ -1,11 +1,7 @@
 with import_raw as (
     select
-        client_id,
-        client_name,
-        region_id,
-        join_date,
-        credit_score
-    from {{ source('raw', 'raw_customers') }}
+        *
+    from {{ ref('snapshot_raw_customers') }}
 ),
 
 add_surrogate_key as (
@@ -20,7 +16,8 @@ add_surrogate_key as (
             "client_name",
             "region_id",
             "join_date",
-            "credit_score"
+            "credit_score",
+            "dbt_valid_from"
         ])}} as stg_customers_sk
     from import_raw
 ),

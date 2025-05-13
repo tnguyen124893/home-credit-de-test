@@ -1,9 +1,6 @@
 with import_raw as (
     select
-        repayment_id,
-        installment_id,
-        repayment_date,
-        repayment_amount
+        *
     from {{ source('raw', 'raw_repayments') }}
 ),
 

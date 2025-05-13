@@ -1,8 +1,7 @@
 with import_raw as (
     select
-        product_type_id,
-        product_type_name
-    from {{ source('raw', 'raw_product_types') }}
+        *
+    from {{ ref('snapshot_raw_product_types') }}
 ),
 
 add_surrogate_key as (
@@ -11,7 +10,8 @@ add_surrogate_key as (
         product_type_name,
         {{ dbt_utils.generate_surrogate_key([
             "product_type_id",
-            "product_type_name"
+            "product_type_name",
+            "dbt_valid_from"
         ])}} as stg_product_types_sk
     from import_raw
 ),

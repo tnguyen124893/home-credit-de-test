@@ -1,14 +1,7 @@
 with import_raw as (
     select
-        installment_id,
-        contract_number,
-        installment_number,
-        due_date,
-        inst_amt_principal,
-        inst_amt_interest,
-        inst_amt_fee,
-        status
-    from {{ source('raw', 'raw_installments') }}
+        *
+    from {{ ref('snapshot_raw_installments') }}
 ),
 
 add_surrogate_key as (
@@ -29,7 +22,8 @@ add_surrogate_key as (
             "inst_amt_principal",
             "inst_amt_interest",
             "inst_amt_fee",
-            "status"
+            "status",
+            "dbt_valid_from"
         ])}} as stg_installments_sk
     from import_raw
 ),

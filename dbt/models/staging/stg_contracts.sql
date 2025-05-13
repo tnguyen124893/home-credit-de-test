@@ -1,16 +1,7 @@
 with import_raw as (
     select
-        contract_number,
-        client_id,
-        product_code,
-        principal_amount,
-        interest_amount,
-        fee_amount,
-        tenor,
-        start_date,
-        status,
-        last_status_change_date
-    from {{ source('raw', 'raw_contracts') }}
+        *
+    from {{ ref('snapshot_raw_contracts') }}
 ),
 
 add_surrogate_key as (
@@ -35,7 +26,8 @@ add_surrogate_key as (
             "tenor",
             "start_date",
             "status",
-            "last_status_change_date"
+            "last_status_change_date",
+            "dbt_valid_from"
         ])}} as stg_contracts_sk
     from import_raw
 ),
