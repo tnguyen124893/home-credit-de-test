@@ -24,8 +24,7 @@ if dev_con:
             create or replace table raw.raw_customers 
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_customers.csv'
         """,
         "raw.raw_customers",
@@ -37,8 +36,7 @@ if dev_con:
             create or replace table raw.raw_contracts 
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_contracts.csv'
         """,
         "raw.raw_contracts",
@@ -50,8 +48,7 @@ if dev_con:
             create or replace table raw.raw_installments 
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_installments.csv'
         """,
         "raw.raw_installments",
@@ -63,8 +60,7 @@ if dev_con:
             create or replace table raw.raw_product_types
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_product_types.csv'
         """,
         "raw.raw_product_types",
@@ -76,8 +72,7 @@ if dev_con:
             create or replace table raw.raw_products
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_products.csv'
         """,
         "raw.raw_products",
@@ -89,8 +84,7 @@ if dev_con:
             create or replace table raw.raw_regions
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_regions.csv'
         """,
         "raw.raw_regions",
@@ -102,8 +96,7 @@ if dev_con:
             create or replace table raw.raw_repayments
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_repayments.csv'
         """,
         "raw.raw_repayments",
@@ -124,8 +117,7 @@ if prod_con:
             create or replace table raw.raw_customers 
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_customers.csv'
         """,
         "raw.raw_customers",
@@ -137,8 +129,7 @@ if prod_con:
             create or replace table raw.raw_contracts 
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_contracts.csv'
         """,
         "raw.raw_contracts",
@@ -150,8 +141,7 @@ if prod_con:
             create or replace table raw.raw_installments 
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_installments.csv'
         """,
         "raw.raw_installments",
@@ -163,8 +153,7 @@ if prod_con:
             create or replace table raw.raw_product_types
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_product_types.csv'
         """,
         "raw.raw_product_types",
@@ -176,8 +165,7 @@ if prod_con:
             create or replace table raw.raw_products
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_products.csv'
         """,
         "raw.raw_products",
@@ -189,8 +177,7 @@ if prod_con:
             create or replace table raw.raw_regions
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_regions.csv'
         """,
         "raw.raw_regions",
@@ -202,8 +189,7 @@ if prod_con:
             create or replace table raw.raw_repayments
             as 
             select
-                *,
-                current_localtimestamp() as ingest_timestamp
+                *
             from 'data/raw_repayments.csv'
         """,
         "raw.raw_repayments",
