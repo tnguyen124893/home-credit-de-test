@@ -6,10 +6,7 @@ with import_raw as (
 
 add_surrogate_key as (
     select
-        repayment_id,
-        installment_id,
-        repayment_date,
-        repayment_amount,
+        *,
         {{ dbt_utils.generate_surrogate_key([
             "repayment_id",
             "installment_id",

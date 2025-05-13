@@ -6,11 +6,7 @@ with import_raw as (
 
 add_surrogate_key as (
     select
-        client_id,
-        client_name,
-        region_id,
-        join_date,
-        credit_score,
+        *,
         {{ dbt_utils.generate_surrogate_key([
             "client_id",
             "client_name",

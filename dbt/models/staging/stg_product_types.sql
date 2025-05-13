@@ -6,8 +6,7 @@ with import_raw as (
 
 add_surrogate_key as (
     select
-        product_type_id,
-        product_type_name,
+        *,
         {{ dbt_utils.generate_surrogate_key([
             "product_type_id",
             "product_type_name",

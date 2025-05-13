@@ -6,8 +6,7 @@ with import_raw as (
 
 add_surrogate_key as (
     select
-        region_id,
-        region_name,
+        *,
         {{ dbt_utils.generate_surrogate_key([
             "region_id",
             "region_name",
