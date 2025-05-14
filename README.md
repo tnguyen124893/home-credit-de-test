@@ -1,8 +1,7 @@
 # How to run this project
 
 ## Overview
-Raw data will be ingested into two DuckDB data warehouses, one for production and one for development.
-dbt will transform raw data through 3 layers: staging, marts and reporting.
+Raw data will be ingested into two DuckDB data warehouses, one for production and one for development. dbt will transform raw data through 3 layers: staging, marts and reporting.
 
 ## Install required packages
 1. Create a python environment for your development
@@ -51,9 +50,7 @@ Run the following to build staging, marts and reporting models in your local sch
 ```bash
 dbt build --target local
 ```
-Change the flag to `--target dev` to run dbt in dev schemas in dev data warehouse
-Change the flag to `--target prod` to run dbt in prod schemas in dev data warehouse
-
+Change the flag to `--target dev` to run dbt in dev schemas in dev data warehouse. Change the flag to `--target prod` to run dbt in prod data warehouse.
 Run the following to build documentation page
 ```bash
 dbt docs generate
