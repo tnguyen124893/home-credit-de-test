@@ -19,5 +19,5 @@ select
 from import_stg_repayments
 where 1=1
 {% if is_incremental() %}
-and repayment_date >= coalesce((select max(repayment_date) from {{ this }}), '1900-01-01')
+and repayment_date >= coalesce((select max(repayment_date) - {{ var('backfill_days') }} from {{ this }}), '1900-01-01')
 {% endif %}
