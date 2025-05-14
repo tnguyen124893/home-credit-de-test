@@ -31,9 +31,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   home_financial_services_dbt:
-    staging:
+    01_staging:
       +schema: staging
       +materialized: view
-    marts:
+    02_marts:
       +schema: marts
       +materialized: view
+    03_reporting:
+      +schema: reporting
+      +materialized: table
