@@ -1,0 +1,189 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimension table for customers, including region and credit information."
+    columns:
+      - name: client_id
+        description: "Unique identifier for the customer."
+        tests:
+          - not_null
+          - unique
+      - name: client_name
+        description: "Name of the customer."
+      - name: region_id
+        description: "Region identifier for the customer."
+        tests:
+          - relationships:
+              to: ref('dim_regions')
+              field: region_id
+      - name: join_date
+        description: "Date the customer joined."
+      - name: credit_score
+        description: "Credit score of the customer."
+      - name: dbt_valid_from
+        description: "SCD2 valid from timestamp."
+      - name: dbt_valid_to
+        description: "SCD2 valid to timestamp."
+      - name: is_latest
+        description: "Flag for the latest record."
+
+  - name: dim_contracts
+    description: "Dimension table for contracts, including product and customer references."
+    columns:
+      - name: contract_number
+        description: "Unique identifier for the contract."
+        tests:
+          - not_null
+          - unique
+      - name: client_id
+        description: "Customer identifier for the contract."
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: client_id
+      - name: product_code
+        description: "Product code for the contract."
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_code
+      - name: principal_amount
+        description: "Principal amount of the contract."
+      - name: interest_amount
+        description: "Interest amount of the contract."
+      - name: fee_amount
+        description: "Fee amount of the contract."
+      - name: tenor
+        description: "Tenor (duration) of the contract."
+      - name: start_date
+        description: "Start date of the contract."
+      - name: status
+        description: "Current status of the contract."
+      - name: last_status_change_date
+        description: "Date of last status change."
+      - name: dbt_valid_from
+        description: "SCD2 valid from timestamp."
+      - name: dbt_valid_to
+        description: "SCD2 valid to timestamp."
+      - name: is_latest
+        description: "Flag for the latest record."
+
+  - name: dim_installments
+    description: "Dimension table for contract installments, including status and due dates."
+    columns:
+      - name: installment_id
+        description: "Unique identifier for the installment."
+        tests:
+          - not_null
+          - unique
+      - name: contract_number
+        description: "Contract identifier for the installment."
+        tests:
+          - relationships:
+              to: ref('dim_contracts')
+              field: contract_number
+      - name: installment_number
+        description: "Installment sequence number."
+      - name: due_date
+        description: "Due date for the installment."
+      - name: inst_amt_principal
+        description: "Principal amount for the installment."
+      - name: inst_amt_interest
+        description: "Interest amount for the installment."
+      - name: inst_amt_fee
+        description: "Fee amount for the installment."
+      - name: status
+        description: "Status of the installment."
+      - name: dbt_valid_from
+        description: "SCD2 valid from timestamp."
+      - name: dbt_valid_to
+        description: "SCD2 valid to timestamp."
+      - name: is_latest
+        description: "Flag for the latest record."
+
+  - name: dim_product_types
+    description: "Dimension table for product types."
+    columns:
+      - name: product_type_id
+        description: "Unique identifier for the product type."
+        tests:
+          - not_null
+          - unique
+      - name: product_type_name
+        description: "Name of the product type."
+      - name: dbt_valid_from
+        description: "SCD2 valid from timestamp."
+      - name: dbt_valid_to
+        description: "SCD2 valid to timestamp."
+      - name: is_latest
+        description: "Flag for the latest record."
+
+  - name: dim_products
+    description: "Dimension table for products, including product type reference."
+    columns:
+      - name: product_code
+        description: "Unique product code."
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Name of the product."
+      - name: product_type_id
+        description: "Product type identifier."
+        tests:
+          - relationships:
+              to: ref('dim_product_types')
+              field: product_type_id
+      - name: base_interest_rate
+        description: "Base interest rate for the product."
+      - name: processing_fee_percent
+        description: "Processing fee percent for the product."
+      - name: min_tenor
+        description: "Minimum tenor for the product."
+      - name: max_tenor
+        description: "Maximum tenor for the product."
+      - name: active_flag
+        description: "Flag indicating if the product is active."
+      - name: dbt_valid_from
+        description: "SCD2 valid from timestamp."
+      - name: dbt_valid_to
+        description: "SCD2 valid to timestamp."
+      - name: is_latest
+        description: "Flag for the latest record."
+
+  - name: dim_regions
+    description: "Dimension table for regions."
+    columns:
+      - name: region_id
+        description: "Unique region identifier."
+        tests:
+          - not_null
+          - unique
+      - name: region_name
+        description: "Name of the region."
+      - name: dbt_valid_from
+        description: "SCD2 valid from timestamp."
+      - name: dbt_valid_to
+        description: "SCD2 valid to timestamp."
+      - name: is_latest
+        description: "Flag for the latest record."
+
+  - name: fct_repayments
+    description: "Fact table for repayment events, linked to installments."
+    columns:
+      - name: repayment_id
+        description: "Unique identifier for the repayment event."
+        tests:
+          - not_null
+          - unique
+      - name: installment_id
+        description: "Installment identifier for the repayment."
+        tests:
+          - relationships:
+              to: ref('dim_installments')
+              field: installment_id
+      - name: repayment_date
+        description: "Date of the repayment."
+      - name: repayment_amount
+        description: "Amount repaid in this event." 

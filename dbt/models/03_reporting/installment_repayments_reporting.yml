@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: installment_repayments_reporting
+    description: |
+      Reporting model that joins installment, contract, product, customer, region, and repayment data. 
+      Provides enriched features for each installment, including repayment status, overdue flags, and aggregation of repayment amounts.
+    tests:
+    - dbt_utils.expression_is_true:
+        expression: ""
+    columns:
+      - name: installment_id
+        description: "Unique identifier for the installment."
+        tests:
+          - not_null
+          - unique
+      - name: contract_number
+        description: "Unique identifier for the contract."
+        tests:
+          - not_null
+      - name: installment_number
+        description: "Installment sequence number within the contract."
+      - name: installment_due_date
+        description: "Due date for the installment."
+      - name: installment_status
+        description: "Status of the installment (Paid, Non-paid, Partially paid)."
+      - name: installment_repayment_amount
+        description: "Total amount repaid for this installment."
+      - name: installment_is_repayment_overdue
+        description: "Flag indicating if the installment is overdue (1 = overdue, 0 = not overdue)."
+      - name: installment_is_repayment_full_paid
+        description: "Flag indicating if the installment is fully paid (1 = yes, 0 = no)."
+      - name: installment_is_repayment_partial_paid
+        description: "Flag indicating if the installment is partially paid (1 = yes, 0 = no)."
+      - name: installment_is_repayment_non_paid
+        description: "Flag indicating if the installment is not paid (1 = yes, 0 = no)."
+      - name: installment_overdue_days
+        description: "Number of days the installment is overdue."
+      - name: contract_principal_amount
+        description: "Principal amount of the contract."
+      - name: contract_interest_amount
+        description: "Interest amount of the contract."
+      - name: contract_fee_amount
+        description: "Fee amount of the contract."
+      - name: contract_total_amount
+        description: "Total contract amount (principal + interest + fee)."
+      - name: contract_tenor
+        description: "Tenor (duration) of the contract."
+      - name: contract_status
+        description: "Current status of the contract."
+      - name: contract_last_status_change_date
+        description: "Date of last status change for the contract."
+      - name: contract_start_date
+        description: "Start date of the contract."
+      - name: product_name
+        description: "Name of the product."
+      - name: product_is_active
+        description: "Flag indicating if the product is active."
+      - name: product_type_name
+        description: "Name of the product type."
+      - name: client_name
+        description: "Name of the client."
+      - name: client_join_date
+        description: "Date the client joined."
+      - name: client_credit_score
+        description: "Credit score of the client."
+      - name: client_region_name
+        description: "Region name of the client." 

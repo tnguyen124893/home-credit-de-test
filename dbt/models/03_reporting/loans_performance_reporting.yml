@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: loans_performance_reporting
+    description: |
+      Reporting model that aggregates installment repayment data at the contract level. 
+      Provides contract-level performance metrics, including counts of overdue, due, and paid installments, as well as overdue buckets (30/60/90+ days).
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "contract_count_overdue_repayments + contract_count_due_repayments = contract_tenor"
+    columns:
+      - name: contract_number
+        description: "Unique identifier for the contract."
+        tests:
+          - not_null
+          - unique
+      - name: contract_principal_amount
+        description: "Principal amount of the contract."
+      - name: contract_fee_amount
+        description: "Fee amount of the contract."
+      - name: contract_total_amount
+        description: "Total contract amount (principal + interest + fee)."
+      - name: contract_tenor
+        description: "Tenor (duration) of the contract."
+      - name: contract_status
+        description: "Current status of the contract."
+      - name: contract_last_status_change_date
+        description: "Date of last status change for the contract."
+      - name: contract_start_date
+        description: "Start date of the contract."
+      - name: product_name
+        description: "Name of the product."
+      - name: product_is_active
+        description: "Flag indicating if the product is active."
+      - name: product_type_name
+        description: "Name of the product type."
+      - name: client_name
+        description: "Name of the client."
+      - name: client_region_name
+        description: "Region name of the client."
+      - name: client_join_date
+        description: "Date the client joined."
+      - name: client_credit_score
+        description: "Credit score of the client."
+      - name: contract_count_overdue_repayments
+        description: "Number of overdue repayments for the contract."
+      - name: contract_count_due_repayments
+        description: "Number of due (not overdue) repayments for the contract."
+      - name: contract_count_overdue_full_paid_repayments
+        description: "Number of overdue repayments that are fully paid."
+      - name: contract_count_overdue_partial_paid_repayments
+        description: "Number of overdue repayments that are partially paid."
+      - name: contract_count_overdue_non_paid_repayments
+        description: "Number of overdue repayments that are not paid."
+      - name: contract_count_overdue_repayments_past_30_days
+        description: "Number of overdue repayments past 30 days."
+      - name: contract_count_overdue_repayments_past_60_days
+        description: "Number of overdue repayments past 60 days."
+      - name: contract_count_overdue_repayments_past_90_days
+        description: "Number of overdue repayments past 90 days." 
